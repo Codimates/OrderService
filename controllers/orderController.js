@@ -160,10 +160,33 @@ const updateProductQuantity = async (req, res) => {
     }
 };
 
+//get orders is payed true
+const getOrdersispayedtrue = async (req, res) => {
+    try {
+        const orders = await Order.find({ispayed:true});
+        res.status(200).json({message:"Orders fetched successfully", data: orders});
+    } catch (error) {
+        res.status(500).json({message:"Error orders fetched", error: error.message});
+    }
+};
+
+//get total overall_total_price
+const getOverallTotalPrice = async (req, res) => {
+    try {
+        const orders = await Order.find({ispayed:true});
+        const total = orders.reduce((sum, order) => sum + order.overall_total_price, 0);
+        res.status(200).json({message:"Total overall_total_price fetched successfully", data: total});
+    } catch (error) {
+        res.status(500).json({message:"Error total overall_total_price fetched", error: error.message});
+    }
+};
+
 module.exports = {
     createOrder,
     getOrdersispayedfalse,
     getUserUnpaidOrders,
     updateOrder,
-    updateProductQuantity  // Add the new method to exports
+    updateProductQuantity,  // Add the new method to exports
+    getOrdersispayedtrue,
+    getOverallTotalPrice
 };
