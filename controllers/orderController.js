@@ -72,6 +72,20 @@ const getUserUnpaidOrders = async (req, res) => {
     }
 };
 
+// Get paid orders for a specific user
+const getUserpaidOrders = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const orders = await Order.find({
+         user_id: userId,
+         ispayed: true
+       });
+      res.status(200).json({ message: "Unpaid orders fetched successfully", data: orders });
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching unpaid orders", error: error.message });
+    }
+};
+
 // Update order method
 const updateOrder = async (req, res) => {
     try {
@@ -185,8 +199,9 @@ module.exports = {
     createOrder,
     getOrdersispayedfalse,
     getUserUnpaidOrders,
+    getUserpaidOrders,
     updateOrder,
-    updateProductQuantity,  // Add the new method to exports
+    updateProductQuantity, 
     getOrdersispayedtrue,
     getOverallTotalPrice
 };
