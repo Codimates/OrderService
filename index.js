@@ -19,7 +19,7 @@ app.use(express.urlencoded({  extended: false })); // For parsing application/x-
 app.use('/', require('./routers/orderRouter'));
 app.use('/stripe', require('./routers/stripeRouter'))
 
-const port = 4004;
+const port = 4009;
 
 // Starting the server
 app.listen(port, () => {
