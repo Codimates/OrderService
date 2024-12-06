@@ -17,12 +17,13 @@ router.use(
     })
 );
 
-const { createOrder, getOrdersispayedfalse, getUserUnpaidOrders, updateOrder, getOrdersispayedtrue, getOverallTotalPrice } = require('../controllers/orderController')
+const { createOrder, getOrdersispayedfalse, getUserUnpaidOrders, updateOrder, getOrdersispayedtrue, getOverallTotalPrice, getUserpaidOrders } = require('../controllers/orderController')
 
 router.post('/createorder', createOrder)
 router.get('/getordersispayedfalse', getOrdersispayedfalse)
 
 router.get('/user/:userId/unpaid',getUserUnpaidOrders);
+router.get('/user/:userId/paid',getUserpaidOrders);
 router.put('/update/:orderId',updateOrder);
 
 router.get('/getordersispayedtrue', getOrdersispayedtrue);
